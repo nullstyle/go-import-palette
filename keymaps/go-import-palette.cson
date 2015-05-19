@@ -1,0 +1,8 @@
+'.platform-darwin, .platform-darwin .command-palette atom-text-editor':
+  'cmd-shift-.': 'go-import-palette:toggle'
+
+'.platform-win32, .platform-win32 .command-palette atom-text-editor':
+  'ctrl-shift-.': 'go-import-palette:toggle'
+
+'.platform-linux, .platform-linux .command-palette atom-text-editor':
+  'ctrl-shift-.': 'go-import-palette:toggle'
