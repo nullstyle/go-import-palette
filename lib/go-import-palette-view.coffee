@@ -25,11 +25,11 @@ class GoImportPaletteView extends SelectListView
       args: ["list", "..."],
       cwd: atom.project.rootDirectories[0].path
       stdout: (o) ->
-        output = o
+        output += o
       exit: (code) =>
         throw "Couldn't list go packages: #{output}" if code != 0
-        packages = ({name:p} for p in output.split("\n"))
-        @setItems(packages)
+        @packages =  ({name:p} for p in output.split("\n"))
+        @setItems(@packages)
 
     new BufferedProcess(options)
 
@@ -48,7 +48,8 @@ class GoImportPaletteView extends SelectListView
   show: ->
     @panel ?= atom.workspace.addModalPanel(item: this)
     @panel.show()
-
+    if @packages?
+      @setItems(@packages)
     @focusFilterEditor()
 
   hide: ->
