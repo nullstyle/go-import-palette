@@ -1,8 +1,8 @@
 _ = require 'underscore-plus'
 {$} = require 'atom-space-pen-views'
-CommandPalette = require '../lib/command-palette-view'
+GoImportPalette = require '../lib/go-import-palette-view'
 
-describe "CommandPalette", ->
+describe "GoImportPalette", ->
   [palette, workspaceElement, editorElement] = []
 
   beforeEach ->
@@ -14,16 +14,16 @@ describe "CommandPalette", ->
 
     runs ->
       editorElement = atom.views.getView(atom.workspace.getActiveTextEditor())
-      activationPromise = atom.packages.activatePackage("command-palette")
+      activationPromise = atom.packages.activatePackage("go-import-palette")
 
       jasmine.attachToDOM(workspaceElement)
-      atom.commands.dispatch(workspaceElement, 'command-palette:toggle')
+      atom.commands.dispatch(workspaceElement, 'go-import-palette:toggle')
 
     waitsForPromise ->
       activationPromise
 
     runs ->
-      palette = $(workspaceElement.querySelector('.command-palette')).view()
+      palette = $(workspaceElement.querySelector('.go-import-palette')).view()
 
   expectCommandsForElement = (element) ->
     keyBindings = atom.keymaps.findKeyBindings(target: element)
@@ -35,7 +35,7 @@ describe "CommandPalette", ->
       for binding in keyBindings when binding.command is name
         expect(eventLi.text()).toContain(_.humanizeKeystroke(binding.keystrokes))
 
-  describe "when command-palette:toggle is triggered on the root view", ->
+  describe "when go-import-palette:toggle is triggered on the root view", ->
     it "shows a list of all valid command descriptions, names, and keybindings for the previously focused element", ->
       keyBindings = atom.keymaps.findKeyBindings(target: editorElement)
       commands = atom.commands.findCommands(target: editorElement)
@@ -47,13 +47,13 @@ describe "CommandPalette", ->
 
     it "clears the previous mini editor text", ->
       palette.filterEditorView.setText('hello')
-      atom.commands.dispatch(workspaceElement, 'command-palette:toggle')
+      atom.commands.dispatch(workspaceElement, 'go-import-palette:toggle')
       expect(palette.filterEditorView.getText()).toBe ''
 
-  describe "when command-palette:toggle is triggered on the open command palette", ->
+  describe "when go-import-palette:toggle is triggered on the open command palette", ->
     it "focus the root view and hides the command palette", ->
       expect(palette.isVisible()).toBeTruthy()
-      atom.commands.dispatch palette[0], 'command-palette:toggle'
+      atom.commands.dispatch palette[0], 'go-import-palette:toggle'
       expect(palette.is(':visible')).toBeFalsy()
       expect(document.activeElement).toBe(editorElement)
 
@@ -79,16 +79,16 @@ describe "CommandPalette", ->
 
   describe "when no element has focus", ->
     it "uses the root view as the element to display and trigger events for", ->
-      atom.commands.dispatch(workspaceElement, 'command-palette:toggle')
+      atom.commands.dispatch(workspaceElement, 'go-import-palette:toggle')
       document.activeElement.blur()
-      atom.commands.dispatch(workspaceElement, 'command-palette:toggle')
+      atom.commands.dispatch(workspaceElement, 'go-import-palette:toggle')
       expectCommandsForElement(workspaceElement)
 
   describe "when the body has focus", ->
     it "uses the root view as the element to display and trigger events for", ->
-      atom.commands.dispatch(workspaceElement, 'command-palette:toggle')
+      atom.commands.dispatch(workspaceElement, 'go-import-palette:toggle')
       document.body.focus()
-      atom.commands.dispatch(workspaceElement, 'command-palette:toggle')
+      atom.commands.dispatch(workspaceElement, 'go-import-palette:toggle')
       expectCommandsForElement(workspaceElement)
 
   describe "match highlighting", ->

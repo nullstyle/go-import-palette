@@ -1,3 +1,5 @@
+go-import-palette contains code atom/command-palette, licensed under:
+
 Copyright (c) 2014 GitHub Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining

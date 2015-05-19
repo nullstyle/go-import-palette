@@ -1,0 +1,16 @@
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      {
+        'label': 'Go Import Palette',
+        'submenu': [
+          {
+            'label': 'Toggle'
+            'command': 'go-import-palette:toggle'
+          }
+        ]
+      }
+    ]
+  }
+]

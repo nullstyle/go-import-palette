@@ -1,14 +1,14 @@
 {
-  "name": "command-palette",
-  "version": "0.36.0",
-  "main": "./lib/command-palette-view",
-  "description": "Find and run available commands using `cmd-shift-p` (OSX) or `ctrl-shift-p` (Linux/Windows).",
+  "name": "go-import-palette",
+  "version": "0.1.0",
+  "main": "./lib/go-import-palette-view",
+  "description": "Add import statements to your go files using fuzzy matching",
   "activationCommands": {
     "atom-workspace": [
-      "command-palette:toggle"
+      "go-import-palette:toggle"
     ]
   },
-  "repository": "https://github.com/atom/command-palette",
+  "repository": "https://github.com/nullstyle/go-import-palette",
   "license": "MIT",
   "engines": {
     "atom": "*"
@@ -16,7 +16,8 @@
   "dependencies": {
     "atom-space-pen-views": "^2.0.0",
     "fuzzaldrin": "^2.1.0",
-    "underscore-plus": "^1.0.0"
+    "underscore-plus": "^1.0.0",
+    "fs-plus": "^2.8.1"
   },
   "devDependencies": {
     "coffeelint": "^1.9.3"
