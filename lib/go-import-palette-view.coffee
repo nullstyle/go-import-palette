@@ -34,8 +34,7 @@ class GoImportPaletteView extends SelectListView
     new BufferedProcess(options)
 
 
-  getFilterKey: ->
-    'name'
+  getFilterKey: -> 'name'
 
   cancelled: -> @hide()
 
@@ -48,8 +47,7 @@ class GoImportPaletteView extends SelectListView
   show: ->
     @panel ?= atom.workspace.addModalPanel(item: this)
     @panel.show()
-    if @packages?
-      @setItems(@packages)
+    @setItems(@packages) if @packages?
     @focusFilterEditor()
 
   hide: ->
@@ -86,4 +84,5 @@ class GoImportPaletteView extends SelectListView
 
   confirmed: ({name}) ->
     @cancel()
-    console.log("adding #{name} to file")
+    buffer = atom.workspace.getActiveTextEditor().getBuffer()
+    buffer.insert([1,0], "import \"#{name}\"\n")
